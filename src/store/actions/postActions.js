@@ -57,14 +57,3 @@ export const setPost = (post) => {
     payload: post
   }
 }
-
-export const setSnackbar = (message, severity, open) => {
-  return {
-    type: types.SET_SNACKBAR,
-    payload: {
-      message,
-      severity,
-      open,
-    }
-  }
-}

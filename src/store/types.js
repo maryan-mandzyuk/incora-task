@@ -13,5 +13,3 @@ export const FETCH_POST_FAILURE = 'FETCH_POST_FAILURE';
 export const SET_OPEN = 'SET_OPEN';
 
 export const SET_POST = 'SET_POST';
-
-export const SET_SNACKBAR = 'SET_SNACKBAR';
