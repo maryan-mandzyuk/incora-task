@@ -11,7 +11,7 @@ const PostDetailsPage = ({ postData, fetchPost, setOpen, }) => {
   const { postId } = useParams();
   const history = useHistory();
   const { post } = postData;
-  console.log(postData);
+
   useEffect(() => {
     fetchPost(postId);
   }, [fetchPost, postId]);
