@@ -15,7 +15,7 @@ export const CommentList = ({ comments }) => {
 
   return (
     <List className={classes.root}>
-      {comments && comments.map((comment) => <CommentItem comment={comment} />)}
+      {comments && comments.map((comment) => <CommentItem key={comment.id} comment={comment} />)}
     </List>
   )
 };
