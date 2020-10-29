@@ -1,20 +1,16 @@
 import React, { useEffect } from 'react';
-import { Button, CircularProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Button, CircularProgress, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { fetchPosts, setOpen } from '../../store/actions/postActions';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import PostPopupForm from '../Popup/PostPopupForm';
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+import { useStyles } from './styles';
+import { PostItem } from './PostItem';
 
 const PostTable = ({ fetchPosts, postData, setOpen }) => {
   const classes = useStyles();
-  const history = useHistory();
   const { userId } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     fetchPosts(userId);
@@ -27,7 +23,7 @@ const PostTable = ({ fetchPosts, postData, setOpen }) => {
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
-        <TableHead>
+        <TableHead color="primary" >
           <TableRow>
             <TableCell>Title</TableCell>
             <TableCell align="right">
@@ -40,20 +36,20 @@ const PostTable = ({ fetchPosts, postData, setOpen }) => {
         <TableBody>
           {postData &&
             postData.posts && postData.posts.map((post) => (
-              <TableRow key={post.id}>
-                <TableCell component="th" scope="row">
-                  {post.title}
-                </TableCell>
-                <TableCell align="right">
-                  <Button onClick={() => history.push(`/post/${post.id}`)} color="primary" variant="contained">
-                    Details
-                  </Button>
-                </TableCell>
-              </TableRow>
+              <PostItem key={post.id} post={post} />
             ))}
         </TableBody>
       </Table>
       <PostPopupForm open={postData.open} handleClose={() => setOpen(false)} popupTitle="Create New Post" />
+      <Grid container>
+        <Button
+          className={classes.usersButton}
+          color="primary"
+          variant="contained"
+          onClick={() => history.push('/users')}>
+          Users
+        </Button>
+      </Grid>
     </TableContainer>
   );
 }

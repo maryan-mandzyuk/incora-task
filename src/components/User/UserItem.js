@@ -6,7 +6,7 @@ export const UserItem = ({ user }) => {
   const history = useHistory();
 
   return (
-    <TableRow key={user.id}>
+    <TableRow>
       <TableCell component="th" scope="row">
         {user.name}
       </TableCell>

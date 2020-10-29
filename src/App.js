@@ -5,8 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 import { UserPage } from './components/User/UserPage';
-import { PostPage } from './components/Post/PostsPage';
-import PostDetailsPage from './components/Post/PostDetailsPage';
+import { PostPage } from './components/Posts/PostsPage';
+import PostDetailsPage from './components/Posts/PostDetailsPage';
 
 function App() {
   return (

@@ -1,11 +1,6 @@
 import React from 'react';
-import { Avatar, Divider, ListItem, ListItemAvatar, ListItemText, makeStyles, Typography } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  inline: {
-    display: 'inline',
-  },
-}));
+import { Avatar, Divider, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
+import { useStyles } from './styles';
 
 export const CommentItem = ({ comment }) => {
   const classes = useStyles();

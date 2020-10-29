@@ -28,7 +28,7 @@ const PostPopupForm = ({ open, handleClose, popupTitle, post = {}, setPost }) =>
     e.preventDefault();
     validate();
 
-    if (!titleError && bodyError) {
+    if (!titleError && !bodyError) {
       if (post.id) {
         try {
           const res = await axios.put(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
@@ -53,7 +53,7 @@ const PostPopupForm = ({ open, handleClose, popupTitle, post = {}, setPost }) =>
           });
           handleClose();
         } catch (err) {
-          console.log(err);
+          console.error(err);
         }
       }
     }

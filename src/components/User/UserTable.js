@@ -1,14 +1,9 @@
 import React, { useEffect } from 'react';
-import { CircularProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { fetchUsers } from '../../store/actions/userActions';
 import { connect } from 'react-redux';
 import { UserItem } from './UserItem';
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+import { useStyles } from './styles';
 
 const UserTable = ({ fetchUsers, userData }) => {
   const classes = useStyles();
@@ -24,7 +19,7 @@ const UserTable = ({ fetchUsers, userData }) => {
   const tableHeadRows = (
     <>
       <TableCell>Name</TableCell>
-      {tableTitles.map((title) => <TableCell align="right">{title}</TableCell>)}
+      {tableTitles.map((title, index) => <TableCell key={index} align="right">{title}</TableCell>)}
     </>
   )
   return (
@@ -38,7 +33,7 @@ const UserTable = ({ fetchUsers, userData }) => {
         <TableBody>
           {userData &&
             userData.users && userData.users.map((user) => (
-              <UserItem user={user} />
+              <UserItem key={user.id} user={user} />
             ))}
         </TableBody>
       </Table>
