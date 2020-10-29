@@ -4,7 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { fetchPost, setOpen } from '../../store/actions/postActions';
-import { CommentList } from '../Comment/CommentList';
+import { CommentList } from './Comment/CommentList';
 import PostPopupForm from '../Popup/PostPopupForm';
 
 const PostDetailsPage = ({ postData, fetchPost, setOpen, }) => {

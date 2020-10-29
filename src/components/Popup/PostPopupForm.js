@@ -3,6 +3,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextF
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setPost } from '../../store/actions/postActions';
+import { Input } from '../Input/Input';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -14,9 +15,7 @@ const PostPopupForm = ({ open, handleClose, popupTitle, post = {}, setPost }) =>
   const [titleError, setTitleError] = useState(false);
   const [bodyError, setBodyError] = useState(false);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-
+  const validate = () => {
     if (title.length < 3) {
       setTitleError(true);
     }
@@ -24,6 +23,10 @@ const PostPopupForm = ({ open, handleClose, popupTitle, post = {}, setPost }) =>
     if (body.length < 10) {
       setBodyError(true);
     }
+  }
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    validate();
 
     if (!titleError && bodyError) {
       if (post.id) {
@@ -68,42 +71,25 @@ const PostPopupForm = ({ open, handleClose, popupTitle, post = {}, setPost }) =>
 
   return (
     <>
-      <Dialog fullScreen open={open} onClose={handleClose} aria-labelledby="form-dialog-title" TransitionComponent={Transition}>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" TransitionComponent={Transition}>
         <DialogTitle id="form-dialog-title">{popupTitle}</DialogTitle>
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="title"
-            label="Title"
-            type="text"
-            autoComplete="off"
-            fullWidth
+          <Input
+            onChangeHandler={titleChangeHandler}
+            name="title"
             value={title}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={titleChangeHandler}
             error={titleError}
-            helperText={titleError ? 'Title must have at least 3 characters' : ' '}
+            errorMessage="Title must have at least 3 characters"
           />
-          <TextField
-            margin="dense"
-            id="body"
-            label="Body"
-            type="text"
-            autoComplete="off"
+          <Input
+            onChangeHandler={bodyChangeHandler}
+            name="body"
+            value={body}
+            error={bodyError}
+            errorMessage="Body must have at least 10 characters"
             multiline
             rowsMax={8}
             rows={4}
-            fullWidth
-            value={body}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={bodyChangeHandler}
-            error={bodyError}
-            helperText={bodyError ? 'Body must have at least 10 characters' : ' '}
           />
         </DialogContent>
         <DialogActions>
